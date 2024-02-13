@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f4f4f4;
+    }
+
+    #app {
+        background-color: rgb(98, 226, 226);
+      display: flex;
+      overflow-x: auto; /* Add horizontal scrollbar */
+    }
+
+    .price-card {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 10px;
+      border: 1px solid black;
+      text-align: center;
+      background-color: #fff;
+      max-width: 300px;
+      width: 100%;
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    p {
+      color: #777;
+      font-size: 1.2em;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      margin: 10px 0;
+      text-align: left;
+    }
+
+    .check-mark {
+      color: green;
+      margin-right: 5px;
+    }
+
+    button {
+      background-color: #007bff;
+      width: 200px;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: ease 0.6s;
+    }
+    button:active{
+        transform: scale(0.85);
+    }
+  </style>
+  <title>Price Card Task</title>
+</head>
+<body>
+
+  <div id="app"></div>
+
+  <script>
+    function createPriceCard(plan, price, features) {
+      const priceCard = document.createElement('div');
+      priceCard.className = 'price-card';
+
+      const title = document.createElement('h2');
+      title.textContent = plan;
+
+      const priceElement = document.createElement('p');
+      priceElement.textContent = `$${price}/month`;
+
+      const featureList = document.createElement('ul');
+      features.forEach(feature => {
+        const listItem = document.createElement('li');
+        if (feature.startsWith('✓')) {
+          const checkMark = document.createElement('span');
+          checkMark.className = 'check-mark';
+          checkMark.textContent = '✓';
+          listItem.appendChild(checkMark);
+          listItem.appendChild(document.createTextNode(feature.substring(1)));
+        } else {
+          listItem.textContent = feature;
+        }
+        featureList.appendChild(listItem);
+      });
+
+      const button = document.createElement('button');
+      button.textContent = 'BUTTON';
+
+      priceCard.appendChild(title);
+      priceCard.appendChild(priceElement);
+      priceCard.appendChild(featureList);
+      priceCard.appendChild(button);
+
+      return priceCard;
+    }
+
+    const plans = [
+      {
+        plan: 'FREE',
+        price: '0',
+        features: [
+          '✔️ Single User',
+          '✔️ 50GB Storage',
+          '✔️ Unlimited Public Projects',
+          '✔️ Community Access',
+          '❌ Unlimited Private Projects',
+          '❌ Dedicated Phone Support',
+          '❌ Free Subdomain',
+          '❌ Monthly Status Reports',
+        ],
+      },
+      {
+        plan: 'PLUS',
+        price: '9',
+        features: [
+          '✔️ 5 Users',
+          '✔️ 50GB Storage',
+          '✔️ Unlimited Public Projects',
+          '✔️ Community Access',
+          '✔️ Unlimited Private Projects',
+          '✔️ Dedicated Phone Support',
+          '❌ Free Subdomain',
+          '❌ Monthly Status Reports',
+        ],
+      },
+      {
+        plan: 'PRO',
+        price: '49',
+        features: [
+          '✔️ Unlimited Users',
+          '✔️ 50GB Storage',
+          '✔️ Unlimited Public Projects',
+          '✔️ Community Access',
+          '✔️ Unlimited Private Projects',
+          '✔️ Dedicated Phone Support',
+          '✔️ Free Subdomain',
+          '✔️ Monthly Status Reports',
+        ],
+      },
+    ];
+
+    const app = document.getElementById('app');
+
+    plans.forEach(plan => {
+      const priceCard = createPriceCard(plan.plan, plan.price, plan.features);
+      app.appendChild(priceCard);
+    });
+  </script>
+</body>
+</html>
